@@ -1,6 +1,8 @@
 ﻿namespace ImageGallery
 {
     using ImageGallery.Data;
+    using ImageGallery.Services;
+    using ImageGallery.Services.Implementations;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
@@ -20,6 +22,8 @@
         {
             services.AddDbContext<ImageGalleryDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<IImageService, ImageService>();
 
             services.AddMvc();
         }
@@ -43,7 +47,7 @@
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Gallery}/{action=Index}/{id?}");
             });
         }
     }
