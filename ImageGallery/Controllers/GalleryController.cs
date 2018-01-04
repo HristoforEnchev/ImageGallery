@@ -15,15 +15,25 @@
             this.images = images;
         }
 
+
         public IActionResult Index()
         {
-
-
-
             return View(new GalleryIndexModel
             {
                 Images = this.images.GetAll()
             });
+        }
+
+        public IActionResult Details(int id)
+        {
+            var image = this.images.GetById(id);
+
+            var model = new GalleryDetailsModel
+            {
+                Image = image
+            };
+
+            return View(model);
         }
     }
 }
