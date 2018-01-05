@@ -11,5 +11,7 @@
         IEnumerable<ImageServiceModel> GetByTag(string tag);
 
         ImageServiceModel GetById(int id);
+
+        void Save(string title, string url);
     }
 }

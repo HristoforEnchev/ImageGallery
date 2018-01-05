@@ -1,6 +1,7 @@
 ﻿namespace ImageGallery.Services.Implementations
 {
     using Data;
+    using Data.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -60,6 +61,19 @@
                     Tags = i.Tags.Select(ti => ti.Tag.Description).ToList()
                 })
                 .ToList();
+        }
+
+        public void Save(string title, string url)
+        {
+            var image = new Image()
+            {
+                Title = title,
+                Created = DateTime.Now,
+                Url = url
+            };
+
+            this.db.Images.Add(image);
+            this.db.SaveChanges();
         }
     }
 }
